@@ -60,7 +60,10 @@ def add(update: Update, context: CallbackContext) -> None:
 
 if __name__ == '__main__':
 	main()
+<<<<<<< HEAD:chatbot.py
 
 ###我们向echo聊天机器人添加了两个命令（在实验3中创建）：/help和/add。
 ###帮助的命令可以被设计为为用户提供使用您的聊天机器人的信息。
 ###我们实现了/add的命令作为一个简单的例子，它计算特定输入词的频率。
+=======
+>>>>>>> c839f1c30322858a44a46c7f69c136e90420396c:chatbot3.py
