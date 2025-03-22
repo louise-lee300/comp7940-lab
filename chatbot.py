@@ -6,10 +6,6 @@ import redis
 from ChatGPT_HKBU import HKBU_ChatGPT
 
 global redis1
-global chatgpt
-chatgpt = HKBU_ChatGPT(config)
-chatgpt_handler = MessageHandler(Filters.text & (~Filters.command), equiped_chatgpt)
-dispatcher.add_handler(chatgpt_handler)
 def main():
     ###加载您的令牌，并为您的机器人创建一个更新程序
     config = configparser.ConfigParser()
@@ -36,6 +32,7 @@ def main():
     dispatcher.add_handler(CommandHandler("add", add))
     dispatcher.add_handler(CommandHandler("help", help_command))
     dispatcher.add_handler(CommandHandler("hello", greet))  # 更新为新的命令处理程序
+    dispatcher.add_handler(CommandHandler("test_redis", test_redis))
 
     ###启动该bot
     updater.start_polling()
@@ -90,6 +87,14 @@ def greet(update: Update, context: CallbackContext) -> None:
         update.message.reply_text(f'hello, {name}!')
     else:
         update.message.reply_text('hello! Please tell me your name.')
+
+def test_redis(update, context):
+    # 存储数据
+    redis1.set('test_key', 'Hello Redis!')
+    # 读取数据
+    value = redis1.get('test_key')
+    update.message.reply_text(f'Redis says: {value}')
+
 
 if __name__ == '__main__':
     main()
